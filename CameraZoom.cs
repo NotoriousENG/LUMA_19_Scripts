@@ -60,17 +60,39 @@ public static class CameraZoom
         float plotCameraX = plot.transform.position.x;
         float cameraX = Camera.main.transform.position.x;
 
-        float currCameraY = Camera.main.transform.localPosition.y;
+        float currCameraY = Camera.main.transform.position.y;
         float plotCameraY = plot.transform.position.y;
         float cameraY = Camera.main.transform.position.y;
 
-        float currCameraZ = Camera.main.transform.localPosition.z;
+        float currCameraZ = Camera.main.transform.position.z;
         float plotCameraZ = plot.transform.position.z;
         float cameraZ = Camera.main.transform.position.z;
 
+        float zOffset = 0;
+
+        if (currCameraZ > 0 && plotCameraZ > 0)
+        {
+            zOffset = Mathf.Abs(currCameraZ - plotCameraZ);
+        }
+        else if (currCameraZ < 0 && plotCameraZ > 0)
+        {
+            zOffset = Mathf.Abs(Mathf.Abs(currCameraZ) - Mathf.Abs( plotCameraZ));
+        }
+        else if (currCameraZ > 0 && plotCameraZ < 0)
+        {
+            zOffset =(-1) * Mathf.Abs(Mathf.Abs(currCameraZ) - Mathf.Abs(plotCameraZ));
+        }
+        else if (currCameraZ < 0 && plotCameraZ < 0)
+        {
+            zOffset = (-1) * Mathf.Abs(currCameraZ - plotCameraZ);
+        }
+
         Vector3 cameraVector = new Vector3(currCameraX, currCameraY, currCameraZ);
-        Vector3 plotVector = new Vector3(plotCameraX, currCameraY, currCameraZ);
-        float idkMan = 0.0f;
+        if (plotCameraZ < 0)
+        {
+            plotCameraZ = plotCameraZ * -1;
+        }
+        Vector3 plotVector = new Vector3(plotCameraX, currCameraY, (currCameraZ-plotCameraZ)/2);
 
         while (cameraVector != plotVector)
         {
