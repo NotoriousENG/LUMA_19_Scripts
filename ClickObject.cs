@@ -5,18 +5,18 @@ public class ClickObject : MonoBehaviour
 {
     public Color clickColor, hoverColor;
     private Color originalColor;
-    
-    private void Start() 
+
+    private void Start()
     {
         originalColor = gameObject.GetComponent<Renderer>().material.color;
     }
-    private void OnMouseEnter() 
+    private void OnMouseEnter()
     {
         Debug.Log(gameObject.name);
         ChangeColor(hoverColor);
     }
 
-    private void OnMouseOver() 
+    private void OnMouseOver()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -24,7 +24,7 @@ public class ClickObject : MonoBehaviour
         }
     }
 
-    private void OnMouseExit() 
+    private void OnMouseExit()
     {
         ChangeColor(originalColor);
     }
