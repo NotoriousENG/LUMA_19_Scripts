@@ -6,6 +6,7 @@ using UnityEngine;
 public class CameraFollowRotate : MonoBehaviour {
     public Transform target;
     public Transform objTarget;
+    private Transform originalTarget;
     public float zoomOutAmmount = .5f;
     public float moveSpeed = 1;
     public float zoomSpeed = 1;
@@ -21,6 +22,7 @@ public class CameraFollowRotate : MonoBehaviour {
     private void Start() 
     {
         nextOffsetPosition = offsetPosition;
+        originalTarget = objTarget;
     }
     private void LateUpdate()
     {
@@ -36,7 +38,8 @@ public class CameraFollowRotate : MonoBehaviour {
     {
         if (objTarget.position != target.position)
         {
-            target.position = Vector3.MoveTowards(target.transform.position, objTarget.transform.position, moveSpeed * Time.deltaTime);
+            
+            target.position = Vector3.MoveTowards(target.transform.position, (objTarget.transform.position - originalTarget.transform.position)/2, moveSpeed * Time.deltaTime);
         }
         if (nextOffsetPosition != offsetPosition)
         {
