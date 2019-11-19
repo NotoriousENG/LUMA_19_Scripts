@@ -7,7 +7,8 @@ public class CameraFollowRotate : MonoBehaviour {
     public Transform target;
     public Transform objTarget;
     public float zoomOutAmmount = .5f;
-    public float speed = 1;
+    public float moveSpeed = 1;
+    public float zoomSpeed = 1;
     public Vector3 offsetPosition;
     private Vector3 nextOffsetPosition;
 
@@ -35,11 +36,11 @@ public class CameraFollowRotate : MonoBehaviour {
     {
         if (objTarget.position != target.position)
         {
-            target.position = Vector3.MoveTowards(target.transform.position, objTarget.transform.position, speed * Time.deltaTime);
+            target.position = Vector3.MoveTowards(target.transform.position, objTarget.transform.position, moveSpeed * Time.deltaTime);
         }
         if (nextOffsetPosition != offsetPosition)
         {
-            offsetPosition = Vector3.MoveTowards(offsetPosition, nextOffsetPosition, speed * Time.deltaTime);
+            offsetPosition = Vector3.MoveTowards(offsetPosition, nextOffsetPosition, zoomSpeed * Time.deltaTime);
         }
         
     }
@@ -67,7 +68,10 @@ public class CameraFollowRotate : MonoBehaviour {
         // compute rotation
         if (lookAt)
         {
-            transform.LookAt(target);
+            if (target.position == objTarget.position)
+            {
+                transform.LookAt(target);
+            }
         }
         else
         {
