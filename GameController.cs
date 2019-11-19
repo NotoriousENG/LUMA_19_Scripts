@@ -25,6 +25,10 @@ public class GameController : MonoBehaviour
 
     public float zoomOutAmount;
 
+    public Screencapture snapCam;
+
+    public CameraFollowRotate cameraFollowRotate;
+
     
     // Start is called before the first frame update
     void Start()
@@ -46,6 +50,12 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             canvasElements.wrongZoneTypeScreen.SetActive(true);
+        }
+
+        //TESTING FOR SCREENSHOTS
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            snapCam.CallTakeSnapshot();
         }
     }
 
@@ -81,7 +91,9 @@ public class GameController : MonoBehaviour
 
                 GameObject newObj = sleepingPlots[Random.Range(0, sleepingPlots.Count)]; // get random zone
                 newObj.SetActive(true);
-                CameraZoom.CameraMoveToPlot(this, newObj);
+                cameraFollowRotate.ZoomOut();
+                cameraFollowRotate.objTarget = newObj.transform;
+                // CameraZoom.CameraMoveToPlot(this, newObj);
                 sleepingPlots.Remove(newObj);
                 // GameObject newObj = GameObject.Instantiate(zonePrefab, zoneTransform.position, zoneTransform.rotation, zoneTransform.parent);
                 // newObj.transform.position += new Vector3 (3,0,0);
