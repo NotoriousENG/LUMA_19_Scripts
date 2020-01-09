@@ -44,4 +44,6 @@ public class ZoningParams : MonoBehaviour
         public bool heightRestriction;
         public bool notAllowed;
     }
+
+    public Conditions conditions;
 }
