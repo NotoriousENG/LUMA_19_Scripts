@@ -38,7 +38,7 @@ public class ZoningParams : MonoBehaviour
     public ZoneTypes[] zoneTypes;
     
     [System.Serializable]
-    public class Conditions : MonoBehaviour
+    public class Conditions
     {
         public ObjName[] cantBeAdjacent;
         public bool heightRestriction;
