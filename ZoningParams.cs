@@ -13,8 +13,9 @@ public enum ZoneTypes
         Education
     }
 
-public enum BuildingName
+public enum ObjName
 {
+    Zone,
     Yoga_Studio,
     Micro_Brewery,
     Single_Family_House,
@@ -33,13 +34,13 @@ public enum BuildingName
 }
 public class ZoningParams : MonoBehaviour
 {
-    public BuildingName buildingName;
+    public ObjName objName;
     public ZoneTypes[] zoneTypes;
     
     [System.Serializable]
     public class Conditions : MonoBehaviour
     {
-        public BuildingName[] cantBeAdjacent;
+        public ObjName[] cantBeAdjacent;
         public bool heightRestriction;
         public bool notAllowed;
     }
